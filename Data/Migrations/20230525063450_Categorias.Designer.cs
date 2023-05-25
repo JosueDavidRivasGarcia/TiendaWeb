@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TiendaWeb.Data;
 
@@ -10,9 +11,10 @@ using TiendaWeb.Data;
 namespace TiendaWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230525063450_Categorias")]
+    partial class Categorias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.15");
@@ -228,29 +230,6 @@ namespace TiendaWeb.Data.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("TiendaWeb.Models.Productos", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("id_categoria")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("precio")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("id_categoria");
-
-                    b.ToTable("Productos");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -300,17 +279,6 @@ namespace TiendaWeb.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TiendaWeb.Models.Productos", b =>
-                {
-                    b.HasOne("TiendaWeb.Models.Categorias", "categoria")
-                        .WithMany()
-                        .HasForeignKey("id_categoria")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("categoria");
                 });
 #pragma warning restore 612, 618
         }
